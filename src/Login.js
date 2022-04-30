@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Login.css'
-import { Link, useHistory } from "react-router-dom";
-import StorefrontIcon from '@material-ui/icons/Storefront';
+import { Link, useNavigate } from "react-router-dom";
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import { auth } from "./firebase";
 
 function Login() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,7 +15,7 @@ function Login() {
         auth
             .signInWithEmailAndPassword(email, password)
             .then(auth => {
-                history.push('/');
+                navigate('/');
             })
             .catch(error => alert(error.message))
 
@@ -28,7 +28,7 @@ function Login() {
             .createUserWithEmailAndPassword(email, password)
             .then((auth) => {
                 if (auth) {
-                    history.push('/');
+                  navigate('/');
                 }
             })
             .catch(error => alert(error.message))
